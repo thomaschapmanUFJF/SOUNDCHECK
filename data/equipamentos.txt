@@ -1,0 +1,2 @@
+Amplificador;30.0;3;true
+Microfone;15.0;5;true
