@@ -1,0 +1,2 @@
+Sala 1;8;50.0;true
+Sala 2;4;35.0;true
