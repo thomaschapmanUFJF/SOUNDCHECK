@@ -5,13 +5,8 @@
 package br.ufjf.dcc.soundcheck.view;
 
 import javax.swing.*;
-import javax.swing.border.Border;
-import javax.swing.border.TitledBorder;
 import javax.swing.plaf.ColorUIResource;
-import javax.swing.plaf.metal.MetalLookAndFeel;
 import javax.swing.plaf.metal.MetalSliderUI;
-import javax.swing.plaf.metal.MetalTheme;
-import javax.swing.plaf.metal.OceanTheme;
 import java.awt.*;
 
 public class Tema {
