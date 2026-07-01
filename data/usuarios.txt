@@ -1,3 +1,4 @@
-CLIENTE;Thomas Adam Chapman;123.456.789-01;(32)99999-9999;thomas@email.com;123;Rua A;Centro;36000-000;Juiz de Fora;MG;1;complemento;banda;estiloMusical
+CLIENTE;Thomas Adam Chapman;131.654.566-07;(32)99999-9999;thomas@email.com;123;Rua A;Centro;36000-000;Juiz de Fora;MG;1;complemento;banda;estiloMusical
 FUNCIONARIO;Funcionario Teste;987.654.321-00;(32)98888-8888;func@email.com;123;MAT001;Atendimento
 GERENTE;Gerente Teste;111.222.333-44;(32)97777-7777;gerente@email.com;123;Senior
+CLIENTE;testeman;123.456.789-01;(32)98887-8306;testeman@email.com;123;testeman;thomas;36016-290;testeman;testeman;testeman;testeman;testeman;testeman
