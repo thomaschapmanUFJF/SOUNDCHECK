@@ -12,5 +12,4 @@ public class Metodos {
     public static void exibeErro(String mensagem, Exception e){
         JOptionPane.showMessageDialog(null, e.getMessage(), mensagem, JOptionPane.ERROR_MESSAGE);    
     }
-    
 }
