@@ -7,6 +7,7 @@ package br.ufjf.dcc.soundcheck.view.TelasCliente;
 import br.ufjf.dcc.soundcheck.controller.ReservaController;
 import br.ufjf.dcc.soundcheck.model.*;
 import br.ufjf.dcc.soundcheck.model.enums.ReservaStatus;
+import br.ufjf.dcc.soundcheck.view.Tema;
 import com.toedter.calendar.JDateChooser;
 import javax.swing.*;
 import java.awt.*;
@@ -49,13 +50,18 @@ public class TelaReserva {
         painelLabel       = new JPanel();
         painelCampos      = new JPanel();
         painelBotoes      = new JPanel();
-        botaoConfirmar    = new JButton("Confirmar Reserva");
-        botaoCancelar     = new JButton("Cancelar Reserva");
-        botaoNovaReserva  = new JButton("Nova Reserva");
-        botaoSair         = new JButton("Sair");
+        botaoConfirmar    = Tema.botaoPrimario("Confirmar Reserva");
+        botaoCancelar     = Tema.botaoSecundario("Cancelar Reserva");
+        botaoNovaReserva  = Tema.botaoPrimario("Nova Reserva");
+        botaoSair         = Tema.botaoSecundario("Sair");
         comboBoxSalas     = new JComboBox<>();
         campoData         = new JDateChooser();
         campoData.setDateFormatString("dd/MM/yyyy");
+        campoData.getJCalendar().setBackground(Tema.FUNDO_CAMPO);
+        campoData.getJCalendar().setForeground(Tema.TEXTO);
+        campoData.getJCalendar().setWeekdayForeground(Tema.TEXTO);
+        campoData.getJCalendar().setSundayForeground(Tema.ACENTO);
+        campoData.getJCalendar().setDecorationBackgroundColor(Tema.FUNDO_PAINEL);
         spinnerHora       = new JSpinner(new SpinnerNumberModel(9, 0, 23, 1));
         spinnerDuracao    = new JSpinner(new SpinnerNumberModel(1.0, 0.5, 12.0, 0.5));
         listaEquipamentos = new JList<>();
@@ -67,6 +73,7 @@ public class TelaReserva {
         labelStatus       = new JLabel("Status:");
         respostaStatus    = new JLabel();
         respostaStatus.setForeground(new Color(0, 155, 0));
+        ReservaController.cancelarReservasExpiradas();
     }
 
     public void abrirTelaReserva(Cliente cliente) {
@@ -76,6 +83,7 @@ public class TelaReserva {
         frame.setResizable(false);
         frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         frame.setLayout(new BorderLayout(5, 5));
+        Tema.estilizarFrame(frame);
 
         carregarSalasDisponiveis();
         carregarEquipamentosDisponiveis();
@@ -87,6 +95,7 @@ public class TelaReserva {
             if (listaReservas.getSelectedValue() != null) {
                 Reserva s = listaReservas.getSelectedValue();
                 respostaStatus.setText(s.getStatus().toString());
+                respostaStatus.setForeground(corStatus(s.getStatus()));
                 comboBoxSalas.removeAllItems();
                 comboBoxSalas.addItem(s.getSala());
                 comboBoxSalas.setEnabled(false);
@@ -98,6 +107,14 @@ public class TelaReserva {
         });
 
         campoData.addPropertyChangeListener("date", e -> {
+            if (listaReservas.getSelectedValue() == null) carregarSalasDisponiveis();
+        });
+
+        spinnerHora.addChangeListener(e -> {
+            if (listaReservas.getSelectedValue() == null) carregarSalasDisponiveis();
+        });
+
+        spinnerDuracao.addChangeListener(e -> {
             if (listaReservas.getSelectedValue() == null) carregarSalasDisponiveis();
         });
 
@@ -192,6 +209,7 @@ public class TelaReserva {
         ArrayList<EquipamentoExtra> equips = new ArrayList<>(listaEquipamentos.getSelectedValuesList());
         ReservaController.fazerReserva(clienteAtual, sala, dataHora, (float) duracao, equips);
         atualizarListaReservas();
+        carregarSalasDisponiveis();
     }
 
     private void carregarSalasDisponiveis() {
@@ -235,5 +253,13 @@ public class TelaReserva {
         spinnerHora.setEnabled(true);
         spinnerDuracao.setEnabled(true);
         listaEquipamentos.setEnabled(true);
+    }
+
+    private Color corStatus(ReservaStatus status) {
+        switch (status) {
+            case CONFIRMADA: return Tema.SUCESSO;
+            case CANCELADA:  return Tema.ERRO;
+            default:         return Tema.ACENTO;
+        }
     }
 }
