@@ -12,11 +12,16 @@ public class ClienteController {
             String senha, String rua, String bairro, String cep, String cidade, String estado,
             String numero, String complemento, String banda, String estiloMusical) {
         try {
+            for (Cliente existente : Persistencia.carregarClientes()) {
+                if (existente.getCpf().equals(cpf)) {
+                    throw new IllegalArgumentException("Já existe um cliente cadastrado com esse CPF.");
+                }
+            }
             Endereco e = new Endereco(rua, bairro, cep, cidade, estado, numero, complemento);
             Cliente c = new Cliente(nome, cpf, telefone, email, senha, e, banda, estiloMusical);
             Persistencia.salvar(c);
             Metodos.exibeSucesso("Cliente cadastrado!");
-        } catch (IllegalArgumentException ex) {
+        } catch (IllegalArgumentException | java.io.IOException ex) {
             Metodos.exibeErro(ex);
         }
     }
