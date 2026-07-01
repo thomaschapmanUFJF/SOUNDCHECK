@@ -57,7 +57,7 @@ public class ReservaController {
     }
 
     public static void cancelarReserva(Reserva reserva) {
-        reserva.setStatus(ReservaStatus.CANCELADA);
+        Persistencia.deletar(reserva);
         JOptionPane.showMessageDialog(null, "Reserva cancelada!", "Sucesso", JOptionPane.INFORMATION_MESSAGE);
     }
 

@@ -27,37 +27,37 @@ public class Reserva implements Savable {
         this.valorTotal = 0;
     }
 
-    public Cliente getCliente() { return cliente; }
+    public Cliente getCliente() { return this.cliente; }
     public void setCliente(Cliente cliente) {
         if (cliente == null) throw new IllegalArgumentException("A reserva deve ter um cliente.");
         this.cliente = cliente;
     }
 
-    public Sala getSala() { return sala; }
+    public Sala getSala() { return this.sala; }
     public void setSala(Sala sala) {
         if (sala == null) throw new IllegalArgumentException("A reserva deve ter uma sala.");
         this.sala = sala;
     }
 
-    public LocalDateTime getData() { return data; }
+    public LocalDateTime getData() { return this.data; }
     public void setData(LocalDateTime data) {
         if (data == null) throw new IllegalArgumentException("A data é obrigatória.");
         this.data = data;
     }
 
-    public float getDuracao() { return duracao; }
+    public float getDuracao() { return this.duracao; }
     public void setDuracao(float duracao) {
         if (duracao <= 0) throw new IllegalArgumentException("Duração deve ser maior que zero.");
         this.duracao = duracao;
     }
 
-    public boolean isPagamentoConfirmado() { return pagamentoConfirmado; }
+    public boolean isPagamentoConfirmado() { return this.pagamentoConfirmado; }
     public void setPagamentoConfirmado(boolean pagamentoConfirmado) { this.pagamentoConfirmado = pagamentoConfirmado; this.status = ReservaStatus.CONFIRMADA;}
 
-    public ReservaStatus getStatus() { return status; }
-    public void setStatus(ReservaStatus status) { this.status = status; }
+    public ReservaStatus getStatus() { return this.status; }
+    public void setStatus(ReservaStatus status) {this.status = status; }
 
-    public List<EquipamentoExtra> getEquipExtras() { return equipExtras; }
+    public List<EquipamentoExtra> getEquipExtras() { return this.equipExtras; }
 
     public void adicionarEquipamento(List<EquipamentoExtra> equipamentos){
         for (EquipamentoExtra equipamento: equipamentos){
@@ -69,7 +69,7 @@ public class Reserva implements Savable {
         atualizaValorTotal();
     }
 
-    public float getValorTotal() { return valorTotal; }
+    public float getValorTotal() { return this.valorTotal; }
     public void setValorTotal(float valorTotal) { this.valorTotal = valorTotal; }
 
     public void atualizaValorTotal() {

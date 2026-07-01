@@ -72,7 +72,7 @@ public class TelaReserva {
     public void abrirTelaReserva(Cliente cliente) {
         this.clienteAtual = cliente;
 
-        frame.setSize(850, 520);
+        frame.setSize(850, 400);
         frame.setResizable(false);
         frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         frame.setLayout(new BorderLayout(5, 5));

@@ -63,17 +63,25 @@ public class Persistencia {
             while ((linha = br.readLine()) != null) {
                 String[] d = linha.split(";");
                 switch (d[0]) {
-                    case "CLIENTE" -> lista.add(new Cliente(
-                        unesc(d[1]), unesc(d[2]), unesc(d[3]), unesc(d[4]), unesc(d[5]),
-                        new Endereco(unesc(d[6]), unesc(d[7]), unesc(d[8]), unesc(d[9]),
-                            unesc(d[10]), unesc(d[11]), unesc(d[12])),
-                        unesc(d[13]), unesc(d[14])));
-                    case "FUNCIONARIO" -> lista.add(new Funcionario(
-                        unesc(d[1]), unesc(d[2]), unesc(d[3]), unesc(d[4]), unesc(d[5]),
-                        unesc(d[6]), unesc(d[7])));
-                    case "GERENTE" -> lista.add(new Gerente(
-                        unesc(d[1]), unesc(d[2]), unesc(d[3]), unesc(d[4]), unesc(d[5]),
-                        unesc(d[6])));
+                    case "CLIENTE":
+                        lista.add(new Cliente(
+                            unesc(d[1]), unesc(d[2]), unesc(d[3]), unesc(d[4]), unesc(d[5]),
+                            new Endereco(unesc(d[6]), unesc(d[7]), unesc(d[8]), unesc(d[9]),
+                                unesc(d[10]), unesc(d[11]), unesc(d[12])),
+                            unesc(d[13]), unesc(d[14])));
+                        break;
+                    case "FUNCIONARIO":
+                        lista.add(new Funcionario(
+                            unesc(d[1]), unesc(d[2]), unesc(d[3]), unesc(d[4]), unesc(d[5]),
+                            unesc(d[6]), unesc(d[7])));
+                        break;
+                    case "GERENTE":
+                        lista.add(new Gerente(
+                            unesc(d[1]), unesc(d[2]), unesc(d[3]), unesc(d[4]), unesc(d[5]),
+                            unesc(d[6])));
+                        break;
+                    default:
+                        break;
                 }
             }
         }
@@ -82,19 +90,31 @@ public class Persistencia {
 
     public static ArrayList<Cliente> carregarClientes() throws IOException {
         ArrayList<Cliente> lista = new ArrayList<>();
-        for (Usuario u : carregarUsuarios()) if (u instanceof Cliente c) lista.add(c);
+        for (Usuario u : carregarUsuarios()) {
+            if (u instanceof Cliente) {
+                lista.add((Cliente) u);
+            }
+        }
         return lista;
     }
 
     public static ArrayList<Funcionario> carregarFuncionarios() throws IOException {
         ArrayList<Funcionario> lista = new ArrayList<>();
-        for (Usuario u : carregarUsuarios()) if (u instanceof Funcionario f) lista.add(f);
+        for (Usuario u : carregarUsuarios()) {
+            if (u instanceof Funcionario) {
+                lista.add((Funcionario) u);
+            }
+        }
         return lista;
     }
 
     public static ArrayList<Gerente> carregarGerentes() throws IOException {
         ArrayList<Gerente> lista = new ArrayList<>();
-        for (Usuario u : carregarUsuarios()) if (u instanceof Gerente g) lista.add(g);
+        for (Usuario u : carregarUsuarios()) {
+            if (u instanceof Gerente) {
+                lista.add((Gerente) u);
+            }
+        }
         return lista;
     }
 
