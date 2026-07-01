@@ -50,9 +50,15 @@ public class ReservaController {
 
     public static void fazerReserva(Cliente cliente, Sala sala, LocalDateTime dataHora,
         float duracao, List<EquipamentoExtra> equipamentos) {
+            if (!carregarSalasDisponiveis(dataHora, duracao).contains(sala)) {
+                JOptionPane.showMessageDialog(null,
+                    "Esta sala não está mais disponível nesse horário.", "Erro", JOptionPane.ERROR_MESSAGE);
+                return;
+            }
             Reserva nova = new Reserva(cliente, sala, dataHora, duracao);
             nova.adicionarEquipamento(equipamentos);
             Persistencia.salvar(nova);
+            enviarEmail(cliente, nova);
             JOptionPane.showMessageDialog(null, "Reserva cadastrada!", "Sucesso", JOptionPane.INFORMATION_MESSAGE);
     }
 
@@ -85,5 +91,38 @@ public class ReservaController {
             reserva.setPagamentoConfirmado(true);
             Persistencia.salvar(reserva);
             JOptionPane.showMessageDialog(null, "Pagamento confirmado!", "Sucesso", JOptionPane.INFORMATION_MESSAGE);
+    }
+    public static void cancelarReservasExpiradas() {
+        try {
+            ArrayList<Reserva> reservas = Persistencia.carregarReservas();
+            ArrayList<Reserva> reservasParaCancelar = new ArrayList<>();
+            LocalDateTime agora = LocalDateTime.now();
+            
+            for (Reserva r : reservas) {
+                if (r.getStatus() == ReservaStatus.PENDENTE) {
+                    if (r.getData().plusHours(24).isBefore(agora)) {
+                        reservasParaCancelar.add(r);
+                    }
+                }
+            }
+            
+            for (Reserva r : reservasParaCancelar) {
+                Persistencia.deletar(r);
+                r.setStatus(ReservaStatus.CANCELADA);
+                Persistencia.salvar(r);
+            }
+            
+            if (!reservasParaCancelar.isEmpty()) {
+                System.out.println("Canceladas automaticamente " + reservasParaCancelar.size() + " reservas expiradas.");
+            }
+        } catch (IOException ex) {
+            ex.printStackTrace();
+        }
+    }
+
+    private static void enviarEmail(Cliente cliente, Reserva reserva) {
+        System.out.println("Enviando email para " + cliente.getEmail() + 
+                          " confirmando reserva da sala " + reserva.getSala().getNumero() +
+                          " para " + reserva.getData());
     }
 }
