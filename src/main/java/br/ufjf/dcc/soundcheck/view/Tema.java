@@ -27,29 +27,20 @@ public class Tema {
     public static final Font FONTE_LABEL     = new Font("Segoe UI", Font.PLAIN, 13);
     public static final Font FONTE_CAMPO     = new Font("Segoe UI", Font.PLAIN, 13);
     public static final Font FONTE_BOTAO     = new Font("Segoe UI", Font.BOLD, 13);
-
-    /**
-     * Call this ONCE at application startup.
-     * It will apply the theme to ALL Swing components globally.
-     */
     public static void aplicarTema() {
-        // Set the look and feel to Metal for better color control
         try {
             UIManager.setLookAndFeel(UIManager.getCrossPlatformLookAndFeelClassName());
         } catch (Exception e) {
             e.printStackTrace();
         }
 
-        // --- COLORS ---
         UIManager.put("Panel.background", FUNDO_PAINEL);
         UIManager.put("OptionPane.background", FUNDO_PAINEL);
         UIManager.put("OptionPane.messageForeground", TEXTO);
         
-        // Labels
         UIManager.put("Label.foreground", TEXTO);
         UIManager.put("Label.font", FONTE_LABEL);
         
-        // Text fields
         UIManager.put("TextField.background", FUNDO_CAMPO);
         UIManager.put("TextField.foreground", TEXTO);
         UIManager.put("TextField.caretForeground", TEXTO);
@@ -58,7 +49,6 @@ public class Tema {
             BorderFactory.createLineBorder(BORDA, 1),
             BorderFactory.createEmptyBorder(4, 8, 4, 8)));
         
-        // Password fields
         UIManager.put("PasswordField.background", FUNDO_CAMPO);
         UIManager.put("PasswordField.foreground", TEXTO);
         UIManager.put("PasswordField.caretForeground", TEXTO);
@@ -66,21 +56,18 @@ public class Tema {
             BorderFactory.createLineBorder(BORDA, 1),
             BorderFactory.createEmptyBorder(4, 8, 4, 8)));
         
-        // Combo boxes
         UIManager.put("ComboBox.background", FUNDO_CAMPO);
         UIManager.put("ComboBox.foreground", TEXTO);
         UIManager.put("ComboBox.font", FONTE_CAMPO);
         UIManager.put("ComboBox.selectionBackground", ACENTO);
         UIManager.put("ComboBox.selectionForeground", Color.WHITE);
         
-        // Lists
         UIManager.put("List.background", FUNDO_CAMPO);
         UIManager.put("List.foreground", TEXTO);
         UIManager.put("List.selectionBackground", ACENTO);
         UIManager.put("List.selectionForeground", Color.WHITE);
         UIManager.put("List.font", FONTE_CAMPO);
         
-        // Scroll panes
         UIManager.put("ScrollPane.background", FUNDO_CAMPO);
         UIManager.put("ScrollPane.viewportBackground", FUNDO_CAMPO);
         UIManager.put("ScrollBar.background", FUNDO_PAINEL);
@@ -88,33 +75,27 @@ public class Tema {
         UIManager.put("ScrollBar.thumbShadow", BORDA);
         UIManager.put("ScrollBar.thumbDarkShadow", BORDA);
         
-        // Check boxes
         UIManager.put("CheckBox.background", FUNDO_PAINEL);
         UIManager.put("CheckBox.foreground", TEXTO);
         UIManager.put("CheckBox.font", FONTE_LABEL);
         
-        // Radio buttons
         UIManager.put("RadioButton.background", FUNDO_PAINEL);
         UIManager.put("RadioButton.foreground", TEXTO);
         UIManager.put("RadioButton.font", FONTE_LABEL);
         
-        // Spinners
         UIManager.put("Spinner.background", FUNDO_CAMPO);
         UIManager.put("Spinner.foreground", TEXTO);
         UIManager.put("Spinner.font", FONTE_CAMPO);
         
-        // Buttons
         UIManager.put("Button.background", ACENTO);
         UIManager.put("Button.foreground", Color.WHITE);
         UIManager.put("Button.font", FONTE_BOTAO);
         UIManager.put("Button.focus", ACENTO);
         UIManager.put("Button.select", ACENTO_HOVER);
         
-        // Titled borders - THIS IS THE KEY PART!
         UIManager.put("TitledBorder.titleColor", TEXTO);
         UIManager.put("TitledBorder.font", FONTE_SUBTITULO);
         
-        // Sliders - Enhanced settings
         UIManager.put("Slider.background", FUNDO_PAINEL);
         UIManager.put("Slider.foreground", ACENTO);
         UIManager.put("Slider.tickColor", TEXTO_SECUNDARIO);
@@ -125,33 +106,26 @@ public class Tema {
         UIManager.put("Slider.focusColor", ACENTO);
         UIManager.put("Slider.highlight", FUNDO_CAMPO);
         UIManager.put("Slider.shadow", BORDA);
-                // Force the focus rectangle to draw outside the view or with no size
         UIManager.put("Slider.focusInsets", new Insets(0, 0, 0, 0));
 
-        // Paint the focus color as fully transparent so the rectangle becomes invisible
         UIManager.put("Slider.focus", new Color(0, 0, 0, 0));
-        // Progress bars
         UIManager.put("ProgressBar.background", FUNDO_CAMPO);
         UIManager.put("ProgressBar.foreground", ACENTO);
         
-        // Tabbed panes
         UIManager.put("TabbedPane.background", FUNDO_PAINEL);
         UIManager.put("TabbedPane.foreground", TEXTO);
         UIManager.put("TabbedPane.selected", ACENTO);
         
-        // Table
         UIManager.put("Table.background", FUNDO_CAMPO);
         UIManager.put("Table.foreground", TEXTO);
         UIManager.put("Table.selectionBackground", ACENTO);
         UIManager.put("Table.selectionForeground", Color.WHITE);
         UIManager.put("Table.gridColor", BORDA);
         
-        // Tooltips
         UIManager.put("ToolTip.background", FUNDO_PAINEL);
         UIManager.put("ToolTip.foreground", TEXTO);
         UIManager.put("ToolTip.border", BorderFactory.createLineBorder(BORDA, 1));
         
-        // Menu
         UIManager.put("Menu.background", FUNDO_PAINEL);
         UIManager.put("Menu.foreground", TEXTO);
         UIManager.put("MenuItem.background", FUNDO_PAINEL);
@@ -159,31 +133,23 @@ public class Tema {
         UIManager.put("MenuItem.selectionBackground", ACENTO);
         UIManager.put("MenuItem.selectionForeground", Color.WHITE);
         
-        // --- FOCUS BORDER FIXES ---
-        // Remove the annoying blue focus border from all components
         UIManager.put("Button.focus", new ColorUIResource(ACENTO));
         UIManager.put("ToggleButton.focus", new ColorUIResource(ACENTO));
         UIManager.put("CheckBox.focus", new ColorUIResource(ACENTO));
         UIManager.put("RadioButton.focus", new ColorUIResource(ACENTO));
         UIManager.put("Slider.focus", new ColorUIResource(ACENTO));
         UIManager.put("ComboBox.focus", new ColorUIResource(ACENTO));
-        // --- FIX COMPLETO PARA REMOVER BORDAS DE FOCO DO METAL ---
 
-        // Corrige o JSpinner (remove a borda interna ao focar nos números)
         UIManager.put("Spinner.focus", new Color(0, 0, 0, 0));
 
-        // Corrige o JComboBox
         UIManager.put("ComboBox.focus", new Color(0, 0, 0, 0));
 
-        // Corrige as JLists (listaReservas e listaEquipamentos)
         UIManager.put("List.focusCellHighlightBorder", BorderFactory.createEmptyBorder());
         UIManager.put("List.focusSelectedCellHighlightBorder", BorderFactory.createEmptyBorder());
 
-        // Garante também o JSlider (caso use em outras telas)
         UIManager.put("Slider.focus", new Color(0, 0, 0, 0));
         UIManager.put("Slider.focusInsets", new Insets(0, 0, 0, 0));
 
-        // Remove blue selection border from JList, JTable, etc.
         UIManager.put("List.focusCellHighlightBorder", BorderFactory.createEmptyBorder());
         UIManager.put("List.focusCellHighlightColor", new ColorUIResource(ACENTO));
         UIManager.put("Table.focusCellHighlightBorder", BorderFactory.createEmptyBorder());
@@ -192,7 +158,6 @@ public class Tema {
         UIManager.put("Tree.focusCellHighlightColor", new ColorUIResource(ACENTO));
     }
 
-    // --- FACTORY METHODS FOR SPECIFIC COMPONENTS ---
 
     public static JButton botaoPrimario(String texto) {
         JButton b = new JButton(texto);
@@ -223,11 +188,6 @@ public class Tema {
         });
         return b;
     }
-
-    /**
-     * Creates a custom styled slider with dark theme colors
-     * Use this instead of new JSlider() for properly themed sliders
-     */
     public static JSlider criarSlider(int min, int max, int value) {
         JSlider slider = new JSlider(min, max, value) {
             @Override
@@ -245,15 +205,11 @@ public class Tema {
         slider.setMinorTickSpacing((max - min) / 10);
         slider.setOpaque(true);
         
-        // Remove focus border from slider
         slider.setFocusable(false);
         
         return slider;
     }
 
-    /**
-     * Custom Slider UI for dark theme
-     */
     private static class DarkSliderUI extends MetalSliderUI {
         public DarkSliderUI(JSlider slider) {
             super();
@@ -269,11 +225,9 @@ public class Tema {
             int trackHeight = 6;
             int trackY = trackBounds.y + (trackBounds.height - trackHeight) / 2;
             
-            // Track background
             g2d.setColor(FUNDO_CAMPO);
             g2d.fillRoundRect(trackBounds.x, trackY, trackBounds.width, trackHeight, 3, 3);
             
-            // Track progress (filled portion)
             JSlider slider = (JSlider) this.slider;
             if (slider.getValue() > slider.getMinimum()) {
                 int fillWidth = (int) ((double) (slider.getValue() - slider.getMinimum()) / 
@@ -294,28 +248,20 @@ public class Tema {
             int x = thumbBounds.x + (thumbBounds.width - size) / 2;
             int y = thumbBounds.y + (thumbBounds.height - size) / 2;
             
-            // Shadow
             g2d.setColor(new Color(0, 0, 0, 50));
             g2d.fillOval(x + 2, y + 2, size, size);
             
-            // Thumb circle
             g2d.setColor(ACENTO);
             g2d.fillOval(x, y, size, size);
             
-            // Highlight
             g2d.setColor(new Color(255, 255, 255, 80));
             g2d.fillOval(x + 3, y + 3, size / 3, size / 3);
             
-            // Border
             g2d.setColor(ACENTO_HOVER);
             g2d.drawOval(x, y, size, size);
         }
     }
 
-    /**
-     * Removes the annoying blue focus border from any component
-     * Call this on individual components if UIManager doesn't work
-     */
     public static void removerBordaFoco(JComponent comp) {
         comp.setFocusable(false);
         if (comp instanceof JButton) {
@@ -329,19 +275,13 @@ public class Tema {
         }
     }
 
-    /**
-     * Apply dark theme to all components in a container recursively
-     * Use this as a fallback if UIManager doesn't work
-     */
     public static void aplicarTemaRecursivamente(Container container) {
         for (Component comp : container.getComponents()) {
             if (comp instanceof JComponent) {
                 JComponent jcomp = (JComponent) comp;
                 
-                // Remove focus borders
                 jcomp.setFocusable(false);
                 
-                // Apply colors based on component type
                 if (comp instanceof JPanel) {
                     jcomp.setBackground(FUNDO_PAINEL);
                 } else if (comp instanceof JLabel) {
@@ -394,7 +334,6 @@ public class Tema {
                 }
             }
             
-            // Recursively apply to child components
             if (comp instanceof Container) {
                 aplicarTemaRecursivamente((Container) comp);
             }
