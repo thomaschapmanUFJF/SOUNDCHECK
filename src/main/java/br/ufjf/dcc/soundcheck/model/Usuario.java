@@ -77,7 +77,7 @@ public abstract class Usuario implements Serializable, Savable {
         setEmail(email);
     }
 
-    public TipoUsuario getTipo() { return tipo; }
+    public TipoUsuario getTipo() { return this.tipo; }
     @Override
 
     public String getArquivo(){

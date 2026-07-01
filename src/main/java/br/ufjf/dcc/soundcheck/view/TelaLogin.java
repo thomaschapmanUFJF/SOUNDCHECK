@@ -42,9 +42,17 @@ public class TelaLogin {
 
     private void abrirTelaPorPerfil(Usuario u) {
         switch (u.getTipo()) {
-            case CLIENTE    -> new TelaMenuCliente().abrirTelaMenuCliente((Cliente) u);
-            case FUNCIONARIO -> new TelaMenuFuncionario().abrirTelaMenuFuncionario((Funcionario) u);
-            case GERENTE    -> new TelaMenuGerente().abrirTelaMenuGerente((Gerente) u);
+            case CLIENTE:
+                new TelaMenuCliente().abrirTelaMenuCliente((Cliente) u);
+                break;
+            case FUNCIONARIO:
+                new TelaMenuFuncionario().abrirTelaMenuFuncionario((Funcionario) u);
+                break;
+            case GERENTE:
+                new TelaMenuGerente().abrirTelaMenuGerente((Gerente) u);
+                break;
+            default:
+                break;
         }
     }
 
