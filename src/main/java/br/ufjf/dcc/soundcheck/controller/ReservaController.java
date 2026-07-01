@@ -57,9 +57,8 @@ public class ReservaController {
     }
 
     public static void cancelarReserva(Reserva reserva) {
-            Persistencia.deletar(reserva);
-            JOptionPane.showMessageDialog(null, "Reserva deletada!", "Sucesso", JOptionPane.INFORMATION_MESSAGE);
-
+        reserva.setStatus(ReservaStatus.CANCELADA);
+        JOptionPane.showMessageDialog(null, "Reserva cancelada!", "Sucesso", JOptionPane.INFORMATION_MESSAGE);
     }
 
     public static ArrayList<Reserva> carregarReservasCliente(Cliente cliente) {
@@ -85,6 +84,6 @@ public class ReservaController {
             Persistencia.deletar(reserva);
             reserva.setPagamentoConfirmado(true);
             Persistencia.salvar(reserva);
-            JOptionPane.showMessageDialog(null, "Reserva deletada!", "Sucesso", JOptionPane.INFORMATION_MESSAGE);
+            JOptionPane.showMessageDialog(null, "Pagamento confirmado!", "Sucesso", JOptionPane.INFORMATION_MESSAGE);
     }
 }

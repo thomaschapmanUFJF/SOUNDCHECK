@@ -140,19 +140,15 @@ public class TelaReserva {
                 }
                 ReservaController.cancelarReserva(s);
                 atualizarListaReservas();
-                limparCampos();
-                carregarSalasDisponiveis();
-                habilitarCampos();
+                limparCampos(); habilitarCampos(); carregarSalasDisponiveis();
             } else {
                 JOptionPane.showMessageDialog(frame, "Nenhuma reserva selecionada!", "Erro", JOptionPane.ERROR_MESSAGE);
             }
         });
 
         botaoNovaReserva.addActionListener(e -> {
-            limparCampos();
-            habilitarCampos();
-            carregarSalasDisponiveis();
-            listaReservas.clearSelection();
+            habilitarCampos(); carregarSalasDisponiveis();
+            limparCampos(); listaReservas.clearSelection();
         });
 
         botaoSair.addActionListener(e -> frame.dispose());
@@ -218,9 +214,7 @@ public class TelaReserva {
     }
 
     private void limparCampos() {
-        if (comboBoxSalas.getItemCount() > 0) {
-            comboBoxSalas.setSelectedIndex(0);
-        }
+        comboBoxSalas.setSelectedIndex(0);
         campoData.setDate(null);
         spinnerHora.setValue(9);
         spinnerDuracao.setValue(1.0);

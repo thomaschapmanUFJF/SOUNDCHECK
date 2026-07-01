@@ -9,7 +9,7 @@ import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Reserva implements Savable {
+public class Reserva {
     private Cliente cliente;
     private Sala sala;
     private LocalDateTime data;
@@ -52,18 +52,13 @@ public class Reserva implements Savable {
     }
 
     public boolean isPagamentoConfirmado() { return pagamentoConfirmado; }
-    public void setPagamentoConfirmado(boolean pagamentoConfirmado) { this.pagamentoConfirmado = pagamentoConfirmado; this.status = ReservaStatus.CONFIRMADA;}
+    public void setPagamentoConfirmado(boolean pagamentoConfirmado) { this.pagamentoConfirmado = pagamentoConfirmado; }
 
     public ReservaStatus getStatus() { return status; }
     public void setStatus(ReservaStatus status) { this.status = status; }
 
     public List<EquipamentoExtra> getEquipExtras() { return equipExtras; }
 
-    public void adicionarEquipamento(List<EquipamentoExtra> equipamentos){
-        for (EquipamentoExtra equipamento: equipamentos){
-            adicionarEquipamento(equipamento);
-        }
-    }
     public void adicionarEquipamento(EquipamentoExtra equipamento) {
         this.equipExtras.add(equipamento);
         atualizaValorTotal();
@@ -73,33 +68,7 @@ public class Reserva implements Savable {
     public void setValorTotal(float valorTotal) { this.valorTotal = valorTotal; }
 
     public void atualizaValorTotal() {
-        float novoValor = this.sala.getValor() * this.duracao;
-        for (EquipamentoExtra eq : this.equipExtras){
-            novoValor += eq.getPrecoUnidade();
-        }
-        this.valorTotal = novoValor;
-    }
-
-    private static final java.time.format.DateTimeFormatter FMT =
-        java.time.format.DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm");
-
-    @Override
-    public String getArquivo() { return "data/reservas.txt"; }
-
-    @Override
-    public String toLinha() {
-        StringBuilder equips = new StringBuilder();
-        for (EquipamentoExtra eq : equipExtras)
-            equips.append(eq.getNome().replace(";", "΋")).append("΋");
-        return String.join(";",
-            cliente.getCpf(),
-            sala.getNumero(),
-            data.format(FMT),
-            String.valueOf(duracao),
-            String.valueOf(pagamentoConfirmado),
-            status.toString(),
-            String.valueOf(valorTotal),
-            equips.toString());
+        // TODO: valorTotal = sala.getValor() * duracao + soma de cada equipamento.getPrecoUnidade()
     }
 
     @Override
