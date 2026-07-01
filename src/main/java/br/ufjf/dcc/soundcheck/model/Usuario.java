@@ -78,8 +78,8 @@ public abstract class Usuario implements Serializable, Savable {
     }
 
     public TipoUsuario getTipo() { return tipo; }
-    
     @Override
+
     public String getArquivo(){
         return "data/usuarios.txt";
     }

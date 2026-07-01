@@ -21,19 +21,6 @@ mvn exec:java
 
 ---
 
-## O que ainda precisa ser implementado
-
-Os métodos marcados com `// TODO` em `ReservaController.java` e `Reserva.java`:
-
-- `Reserva.atualizaValorTotal()` — `sala.getValor() * duracao` + soma dos equipamentos
-- `ReservaController.carregarSalasDisponiveis()` — filtrar salas sem conflito de horário
-- `ReservaController.fazerReserva()` — criar, calcular valor e persistir
-- `ReservaController.cancelarReserva()` — alterar status e regravar
-- `ReservaController.carregarReservasPendentes()` — filtrar por PENDENTE
-- `ReservaController.confirmarPagamento()` — confirmar e regravar
-
----
-
 ## Estrutura
 
 ```

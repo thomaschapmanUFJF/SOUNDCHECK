@@ -5,67 +5,66 @@
 package br.ufjf.dcc.soundcheck.view.TelasFuncionario;
 
 import br.ufjf.dcc.soundcheck.model.Funcionario;
+import br.ufjf.dcc.soundcheck.view.Tema;
 import javax.swing.*;
 import java.awt.*;
 
 public class TelaMenuFuncionario {
     private JFrame frame;
-    private JPanel painelPrincipal;
-    private JPanel painelEsq;
-    private JPanel painelDir;
-    private JButton botaoGerenciarClientes;
-    private JButton botaoGerenciarReservas;
-    private JButton botaoRegistrarSalas;
-    private JButton botaoRegistrarEquipamentos;
-    private JButton botaoSair;
 
     public TelaMenuFuncionario() {
-        frame                    = new JFrame("Menu - Funcionário");
-        painelPrincipal           = new JPanel();
-        painelEsq                 = new JPanel();
-        painelDir                 = new JPanel();
-        botaoGerenciarClientes    = new JButton("Gerenciar Clientes");
-        botaoGerenciarReservas    = new JButton("Gerenciar Reservas");
-        botaoRegistrarSalas       = new JButton("Registrar Salas");
-        botaoRegistrarEquipamentos = new JButton("Registrar Equipamentos");
-        botaoSair                 = new JButton("Sair");
+        frame = new JFrame("SoundCheck — Funcionário");
     }
 
     public void abrirTelaMenuFuncionario(Funcionario funcionario) {
-        frame.setSize(800, 450);
+        Tema.estilizarFrame(frame);
+        frame.setSize(500, 480);
         frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         frame.setResizable(false);
+        frame.setLayout(new BorderLayout());
 
-        botaoGerenciarClientes.addActionListener(e -> {
-            new TelaCadastroCliente().abrirTelaCadastroCliente();
-        });
-        botaoGerenciarReservas.addActionListener(e -> {
-            new TelaGerenciarReservas().abrirTelaGerenciarReservas();
-        });
-        botaoRegistrarSalas.addActionListener(e -> {
-            new TelaRegistrarSalas().abrirTelaRegistrarSalas();
-        });
-        botaoRegistrarEquipamentos.addActionListener(e -> {
-            new TelaRegistrarEquipamentos().abrirTelaRegistrarEquipamentos();
-        });
-        botaoSair.addActionListener(e -> frame.dispose());
+        JPanel topo = new JPanel(new BorderLayout());
+        topo.setBackground(Tema.FUNDO);
+        topo.setBorder(BorderFactory.createEmptyBorder(28, 40, 16, 40));
+        JLabel titulo = Tema.labelTitulo("SoundCheck");
+        JLabel sub    = Tema.labelSubtitulo("Funcionário · " + funcionario.getNome().split(" ")[0]);
+        topo.add(titulo, BorderLayout.CENTER);
+        topo.add(sub,    BorderLayout.SOUTH);
 
-        painelPrincipal.setLayout(new GridLayout(0, 2, 25, 0));
-        painelPrincipal.setBorder(BorderFactory.createEmptyBorder(45, 35, 45, 35));
+        JPanel botoes = new JPanel(new GridLayout(4, 1, 0, 12));
+        botoes.setBackground(Tema.FUNDO);
+        botoes.setBorder(BorderFactory.createEmptyBorder(10, 50, 10, 50));
 
-        painelEsq.setLayout(new GridLayout(0, 1, 0, 20));
-        painelEsq.add(botaoGerenciarClientes);
-        painelEsq.add(botaoGerenciarReservas);
+        JButton bClientes    = Tema.botaoPrimario("👥  Gerenciar Clientes");
+        JButton bReservas    = Tema.botaoPrimario("📋  Gerenciar Reservas");
+        JButton bSalas       = Tema.botaoSecundario("🚪  Registrar Salas");
+        JButton bEquipamentos = Tema.botaoSecundario("🎛  Registrar Equipamentos");
 
-        painelDir.setLayout(new GridLayout(0, 1, 0, 20));
-        painelDir.add(botaoRegistrarSalas);
-        painelDir.add(botaoRegistrarEquipamentos);
-        painelDir.add(botaoSair);
+        for (JButton b : new JButton[]{bClientes, bReservas, bSalas, bEquipamentos}) {
+            b.setFont(new Font("Segoe UI", Font.BOLD, 14));
+            b.setPreferredSize(new Dimension(0, 48));
+        }
 
-        painelPrincipal.add(painelEsq);
-        painelPrincipal.add(painelDir);
+        bClientes.addActionListener(e     -> new TelaCadastroCliente().abrirTelaCadastroCliente());
+        bReservas.addActionListener(e     -> new TelaGerenciarReservas().abrirTelaGerenciarReservas());
+        bSalas.addActionListener(e        -> new TelaRegistrarSalas().abrirTelaRegistrarSalas());
+        bEquipamentos.addActionListener(e -> new TelaRegistrarEquipamentos().abrirTelaRegistrarEquipamentos());
 
-        frame.add(painelPrincipal);
+        botoes.add(bClientes);
+        botoes.add(bReservas);
+        botoes.add(bSalas);
+        botoes.add(bEquipamentos);
+
+        JPanel rodape = new JPanel(new FlowLayout(FlowLayout.RIGHT));
+        rodape.setBackground(Tema.FUNDO);
+        rodape.setBorder(BorderFactory.createEmptyBorder(0, 40, 16, 40));
+        JButton bSair = Tema.botaoSecundario("Sair");
+        bSair.addActionListener(e -> frame.dispose());
+        rodape.add(bSair);
+
+        frame.add(topo,   BorderLayout.NORTH);
+        frame.add(botoes, BorderLayout.CENTER);
+        frame.add(rodape, BorderLayout.SOUTH);
         frame.setVisible(true);
         frame.setLocationRelativeTo(null);
     }
