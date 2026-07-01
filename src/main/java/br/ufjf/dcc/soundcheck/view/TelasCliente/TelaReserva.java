@@ -13,6 +13,7 @@ import java.awt.*;
 import java.time.LocalDateTime;
 import java.time.ZoneId;
 import java.util.ArrayList;
+import br.ufjf.dcc.soundcheck.view.Tema;
 
 public class TelaReserva {
     private JFrame frame;
